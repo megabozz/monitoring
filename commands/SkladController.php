@@ -19,7 +19,7 @@ class SkladController extends Controller {
     private function import_1C_xml_file($filename, $auth = []) {
         $content = null;
         //if (preg_match('/^(?:.*\/|)report_orders_(?<O_TYPE>[a-zA-Z]+)_(?<Y>\d\d\d\d)(?<M>\d\d)(?<D>\d\d)(?<h>\d\d)(?<m>\d\d)(?<s>\d\d)\.xml$/ui', $filename, $m)) {
-        if (preg_match('/^(?:.*\/|)(?:main_(?:\d+_){8,8}|)report_orders_(?<O_TYPE>[a-zA-Z]+)_(?<Y>\d\d\d\d)(?<M>\d\d)(?<D>\d\d)(?<h>\d\d)(?<m>\d\d)(?<s>\d\d)\.xml.1c8file$/ui', $filename, $m)) {
+        if (preg_match('/^(?:.*\/|)(?:main_(?:\d+_){8,8}|)report_orders_(?<O_TYPE>[a-zA-Z]+)_(?<Y>\d\d\d\d)(?<M>\d\d)(?<D>\d\d)(?<h>\d\d)(?<m>\d\d)(?<s>\d\d)\.1c8file$/ui', $filename, $m)) {
             $this->logi("import file [" . $filename . "]");
             $O_TYPE = mb_strtolower($m['O_TYPE']);
             $isOffice = ($O_TYPE == "cnt");
