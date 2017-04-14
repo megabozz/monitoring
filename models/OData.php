@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use app\models\Sklad;
+//use app\models\Sklad;
 
 class OData extends ActiveRecord {
 
@@ -23,24 +23,13 @@ class OData extends ActiveRecord {
         ];
     }
 
-    private function getSkladByName($name) {
-        $sender = Sklad::find()->where('name=:name', [':name' => $name])->one();
-        if (!$sender) {
-            $sender = new Sklad(['scenario' => 'create']);
-            $sender->name = $name;
-            if (!$sender->save()) {
-                throw new Exception("Error saving to sklad " . $name);
-            }
-        }
-        return $sender;
-    }
 
-    public function beforeValidate() {
-        if ($this->isNewRecord) {
-            $sender = $this->getSkladByName($this->sender);
-            $this->sender_id = $sender->id;
-        }
-        return parent::beforeValidate();
-    }
+//    public function beforeValidate() {
+//        if ($this->isNewRecord) {
+//            $sender = $this->getSkladByName($this->sender);
+//            $this->sender_id = $sender->id;
+//        }
+//        return parent::beforeValidate();
+//    }
     
 }

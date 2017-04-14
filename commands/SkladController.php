@@ -5,15 +5,33 @@ namespace app\commands;
 use yii\console\Controller;
 use yii\helpers\Console;
 use app\models\OData;
+use app\models\Sklad;
 
 class SkladController extends Controller {
 
+    private $skladNotFound = [];
+    private $skladNames = [];
+    
+    
     public function logi($msg) {
         $this->stdout($msg . "\r\n", Console::FG_YELLOW);
     }
 
     public function loge($msg) {
         $this->stderr($msg . "\r\n", Console::FG_RED);
+    }
+
+    private function getSkladIdByName($name) {
+        $sklad = Sklad::find()->where('name=:name', [':name' => $name])->one();
+        if (!$sklad) {
+//            $sender = new Sklad(['scenario' => 'create']);
+//            $sender->name = $name;
+//            if (!$sender->save()) {
+//                throw new Exception("Error saving to sklad " . $name);
+//            }
+            return false;
+        }
+        return $sklad->id;
     }
 
     private function import_1C_xml_file($filename, $auth = []) {
@@ -45,22 +63,31 @@ class SkladController extends Controller {
                         $row['sender_count'] = $count;
                     }
 
-                    $this->logi(sprintf("F:%s\tS:%s\tR:%s\tN:%d", $O_TYPE, $row['sender'], $row['receiver'], $count));
+                    $skladId = $this->getSkladIdByName($row['sender']);
+                    if ($skladId) {
+                        $this->skladNames[$row['sender']] = 1;
 
-                    $odata = OData::find()->where('id=:id', [':id' => $row['id']])->one();
-                    if (!$odata) {
-                        $odata = new OData(['scenario' => 'create']);
-                        $odata->attributes = $row;
-                    } else {
-                        $odata->scenario = 'update';
-                        $odata->attributes = $row;
+                        $this->logi(sprintf("F:%s\tS:%s\tR:%s\tN:%d", $O_TYPE, $row['sender'], $row['receiver'], $count));
+
+                        $odata = OData::find()->where('id=:id', [':id' => $row['id']])->one();
+                        if (!$odata) {
+                            $odata = new OData(['scenario' => 'create']);
+                            $odata->attributes = $row;
+                            $odata->sender_id = $skladId;
+                        } else {
+                            $odata->scenario = 'update';
+                            $odata->attributes = $row;
+                        }
+                        $odata->save();
+                    }else{
+                        $this->loge("not found SKLADID for name [".$row['sender']."]");
+                        $this->skladNotFound[$row['sender']] = 1;
                     }
-                    $odata->save();
                 }
-//                $this->logi("renaming [" . $filename . "] to [" . $filename . ".old]");
-//                rename($filename, $filename . ".old", $auth);
-                $this->logi("deleting [" . $filename . "]");
-                unlink($filename, $auth);
+                $this->logi("renaming [" . $filename . "] to [" . $filename . ".old]");
+                rename($filename, $filename . ".old", $auth);
+//                $this->logi("deleting [" . $filename . "]");
+//                unlink($filename, $auth);
             } else {
                 $this->loge(error_get_last()['message']);
             }
@@ -87,9 +114,9 @@ class SkladController extends Controller {
         foreach ($dirs as $basedir) {
             $dh = opendir($basedir, $auth);
             if ($dh) {
-                
+
                 $files = [];
-                
+
                 while ($file = readdir($dh)) {
                     if ($file !== "." && $file !== "..") {
                         //$this->import_1C_xml_file($basedir . $file, $auth);
@@ -97,17 +124,24 @@ class SkladController extends Controller {
                     }
                 }
                 closedir($dh);
-                
+
                 ksort($files);
-                foreach($files as $file => $v){
+                foreach ($files as $file => $v) {
                     $this->import_1C_xml_file($basedir . $file, $auth);
                 }
-                
-                
-                
             } else {
                 $this->loge(error_get_last()['message']);
             }
+        }
+
+        sleep(1);
+        
+        foreach($this->skladNotFound as $k=> $v){
+            $this->loge($k);
+        }
+        sleep(1);
+        foreach($this->skladNames as $k=> $v){
+            $this->logi($k);
         }
     }
 
