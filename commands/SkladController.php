@@ -4,8 +4,8 @@ namespace app\commands;
 
 use yii\console\Controller;
 use yii\helpers\Console;
-use app\models\OData;
-use app\models\Sklad;
+use app\models\db\OData;
+use app\models\db\Sklad;
 
 class SkladController extends Controller {
 
