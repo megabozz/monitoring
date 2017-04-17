@@ -84,10 +84,10 @@ class SkladController extends Controller {
                         $this->skladNotFound[$row['sender']] = 1;
                     }
                 }
-                $this->logi("renaming [" . $filename . "] to [" . $filename . ".old]");
-                rename($filename, $filename . ".old", $auth);
-//                $this->logi("deleting [" . $filename . "]");
-//                unlink($filename, $auth);
+//                $this->logi("renaming [" . $filename . "] to [" . $filename . ".old]");
+//                rename($filename, $filename . ".old", $auth);
+                $this->logi("deleting [" . $filename . "]");
+                unlink($filename, $auth);
             } else {
                 $this->loge(error_get_last()['message']);
             }
