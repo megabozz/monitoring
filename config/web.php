@@ -45,8 +45,6 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/main',
-//                '/auth' => '/auth',
-                
             ],
         ],
         

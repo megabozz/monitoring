@@ -2,11 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\db\Sklad;
-
+use app\models\db\SkladGroup;
+use yii\data\ActiveDataProvider;
 
 class SkladController extends DefaultController {
-    
+
     public function behaviors() {
         $b = parent::behaviors();
         $b['access']['rules'][] = [
@@ -15,13 +15,17 @@ class SkladController extends DefaultController {
         ];
         return $b;
     }
-    
-    public function actionIndex(){
-        $sklad_m = Sklad::find()
-                ->groupBy(['kod_ib'])
-                ->distinct(true);
-        return $this->render('index', ['model' => $sklad_m]);
+
+    public function actionIndex() {
+        $sklad = SkladGroup::find()->orderBy([
+            'name' => SORT_ASC
+        ]);
+        $skladProvider = new ActiveDataProvider([
+            'query' => $sklad
+        ]);
+
+
+        return $this->render('index', ['modelDataProvider' => $skladProvider]);
     }
-    
-    
+
 }
