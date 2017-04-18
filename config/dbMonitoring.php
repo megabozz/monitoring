@@ -6,4 +6,5 @@ return [
     'username' => 'ev_monitoring',
     'password' => 'ev_monitoring',
     'charset' => 'utf8',
+    'enableSchemaCache' => false,
 ];
