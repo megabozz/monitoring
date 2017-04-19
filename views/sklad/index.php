@@ -1,12 +1,5 @@
 <?php
+
 /* @var $this yii\web\View */
+/* @var $model \yii\db\ActiveRecord */
 
-use yii\grid\GridView;
-
-
-GridView::begin([
-    'dataProvider' => $modelDataProvider,
-]);
-
-
-GridView::end();

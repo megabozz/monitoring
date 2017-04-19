@@ -7,4 +7,6 @@ return [
     'password' => 'ev_monitoring',
     'charset' => 'utf8',
     'enableSchemaCache' => false,
+    'schemaCacheDuration' => 30,
+    'schemaCache' => 'cache',
 ];

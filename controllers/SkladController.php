@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\db\SkladGroup;
-use yii\data\ActiveDataProvider;
+use app\models\db\IncidentByGroup;
+use app\models\db\IncidentBySender;
 
 class SkladController extends DefaultController {
 
@@ -17,15 +17,20 @@ class SkladController extends DefaultController {
     }
 
     public function actionIndex() {
-        $sklad = SkladGroup::find()->orderBy([
-            'name' => SORT_ASC
-        ]);
-        $skladProvider = new ActiveDataProvider([
-            'query' => $sklad
-        ]);
+        $this->view->title = "SKLAD";
+        return $this->render('index');
+    }
 
-
-        return $this->render('index', ['modelDataProvider' => $skladProvider]);
+    public function actionIncidents_by_group() {
+        $this->view->title = "SKLAD / INCIDENTS BY GROUP";
+        $model = IncidentByGroup::find();
+        return $this->render('incidents', ['model' => $model]);
+    }
+    public function actionIncidents_by_sender(){
+        $this->view->title = "SKLAD / INCIDENTS BY SENDER";
+        $model = IncidentBySender::find();
+        return $this->render('incidents', ['model' => $model]);
+        
     }
 
 }

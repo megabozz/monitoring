@@ -35,7 +35,10 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-            ['label' => 'SklaD', 'url' => ['/sklad']],
+            ['label' => 'SKLAD', 'items' => [
+                ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
+                ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
+            ]],
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
 //            Yii::$app->user->isGuest ? (

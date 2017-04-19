@@ -14,7 +14,6 @@ class MainController extends DefaultController
         $b = parent::behaviors();
         $b['access']['rules'][] = [
             'allow' => true,
-//            'roles' => ['?'],
         ];
         return $b;
     }

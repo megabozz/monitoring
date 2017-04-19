@@ -40,6 +40,13 @@ $config = [
                 ],
             ],
         ],
+        
+        'session' => [
+            'class' => yii\web\DbSession::className(),
+             'db' => 'dbMonitoring',
+            'sessionTable' => 'web_sessions',
+        ],
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
