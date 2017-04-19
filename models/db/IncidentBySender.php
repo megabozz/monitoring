@@ -12,7 +12,7 @@ class IncidentBySender extends ActiveRecord {
     }
 
     public static function tableName() {
-        return 'incident_by_group';
+        return 'incident_by_sender';
     }
 
     public function rules() {
