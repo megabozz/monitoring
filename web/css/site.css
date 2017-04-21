@@ -113,3 +113,15 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+/*                                              СЮДА ПИСАТЬ КОДЕ              */
+
+body > .wrap {
+    background-color: #eed3d7;
+}
+
+
+body > .wrap > .container > .grid-view > div.summary {
+    font-weight: bold;
+}

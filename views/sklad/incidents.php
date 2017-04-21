@@ -17,6 +17,8 @@ GridView::begin([
     'dataProvider' => $provider,
     'columns' => $columns
 ]);
-
-
 GridView::end();
+
+foreach($provider->models as $m){
+    var_dump($m->name);
+}

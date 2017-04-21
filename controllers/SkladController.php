@@ -26,8 +26,6 @@ class SkladController extends DefaultController {
         $model = new IncidentByGroup(['scenario' => 'view']);
         $columns = $model->getColumns();
         $find = $model->find();
-        
-        
         return $this->render('incidents', ['model' => $find, 'columns'=> $columns]);
     }
     public function actionIncidents_by_sender(){
