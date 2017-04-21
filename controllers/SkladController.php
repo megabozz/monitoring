@@ -23,13 +23,19 @@ class SkladController extends DefaultController {
 
     public function actionIncidents_by_group() {
         $this->view->title = "SKLAD / INCIDENTS BY GROUP";
-        $model = IncidentByGroup::find();
-        return $this->render('incidents', ['model' => $model]);
+        $model = new IncidentByGroup(['scenario' => 'view']);
+        $columns = $model->getColumns();
+        $find = $model->find();
+        
+        
+        return $this->render('incidents', ['model' => $find, 'columns'=> $columns]);
     }
     public function actionIncidents_by_sender(){
         $this->view->title = "SKLAD / INCIDENTS BY SENDER";
-        $model = IncidentBySender::find();
-        return $this->render('incidents', ['model' => $model]);
+        $model = new IncidentBySender(['scenario'=>'view']);
+        $find = $model->find();
+        $columns = $model->getColumns();
+        return $this->render('incidents', ['model' => $find, 'columns'=> $columns]);
         
     }
 

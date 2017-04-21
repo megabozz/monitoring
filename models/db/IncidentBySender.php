@@ -2,14 +2,9 @@
 
 namespace app\models\db;
 
-use Yii;
-use yii\db\ActiveRecord;
+use app\models\db\BaseModel;
 
-class IncidentBySender extends ActiveRecord {
-
-    public static function getDb() {
-        return Yii::$app->get('dbMonitoring');
-    }
+class IncidentBySender extends BaseModel {
 
     public static function tableName() {
         return 'incident_by_sender';
@@ -17,6 +12,13 @@ class IncidentBySender extends ActiveRecord {
 
     public function rules() {
         return [
+            [['name','errors'],'safe','on'=>['view']],
+        ];
+    }
+    public function attributeLabels() {
+        return parent::attributeLabels() + [
+            'name' => 'Наименование',
+            'errors' => 'Ошибки',
         ];
     }
     

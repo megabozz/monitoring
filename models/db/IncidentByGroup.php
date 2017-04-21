@@ -2,14 +2,10 @@
 
 namespace app\models\db;
 
-use Yii;
-use yii\db\ActiveRecord;
+use app\models\db\BaseModel;
 
-class IncidentByGroup extends ActiveRecord {
+class IncidentByGroup extends BaseModel {
 
-    public static function getDb() {
-        return Yii::$app->get('dbMonitoring');
-    }
 
     public static function tableName() {
         return 'incident_by_group';
@@ -17,7 +13,17 @@ class IncidentByGroup extends ActiveRecord {
 
     public function rules() {
         return [
+            [['name', 'ib_code', 'errors'], 'safe', 'on' => ['view']],
         ];
     }
+    
+    public function attributeLabels() {
+        return parent::attributeLabels() + [
+            'name' => 'Наименование',
+            'ib_code' => 'Код базы',
+            'errors' => 'Ошибки',
+        ];
+    }
+    
     
 }
