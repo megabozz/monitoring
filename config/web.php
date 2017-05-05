@@ -57,7 +57,7 @@ $config = [
         ],
         
         //'db' => require(__DIR__ . '/db.php'),
-        'dbMonitoring' => require(__DIR__.'/dbMonitoring.php'),
+        'dbMonitoring' => require(__DIR__.'/db_monitoring.php'),
     ],
     'params' => $params,
 ];
