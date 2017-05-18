@@ -19,6 +19,6 @@ GridView::begin([
 ]);
 GridView::end();
 
-foreach($provider->models as $m){
-    var_dump($m->name);
-}
+//foreach($provider->models as $m){
+//    var_dump($m->name);
+//}

@@ -25,6 +25,23 @@ AppAsset::register($this);
 
         <div class="wrap">
             <?php
+            
+            $uitem = [ 'label' => 'GUEST', 'items' => []];
+            if(!Yii::$app->user->isGuest){
+                $uitem['label'] = Yii::$app->user->identity->getADfield('displayname');
+                if($d = Yii::$app->user->identity->getADfield('description')){
+                    $uitem['items'][] = ['label' => $d];
+                }
+                if($d = Yii::$app->user->identity->getADfield('telephonenumber')){
+                    $uitem['items'][] = ['label' => $d];
+                }
+                if($d = Yii::$app->user->identity->getADfield('mail')){
+                    $uitem['items'][] = ['label' => $d];
+                }
+            }
+                //'label' => Yii::$app->user->isGuest ? 'GUEST' : Yii::$app->user->identity->getFullName()];
+            
+            
             NavBar::begin([
                 'brandLabel' => 'MONITORING',
                 'brandUrl' => Yii::$app->homeUrl,
@@ -39,6 +56,7 @@ AppAsset::register($this);
                 ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
                 ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
             ]],
+            $uitem,
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
 //            Yii::$app->user->isGuest ? (
