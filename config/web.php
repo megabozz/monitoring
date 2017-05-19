@@ -45,7 +45,7 @@ $config = [
         
         'session' => [
             'class' => yii\web\DbSession::className(),
-             'db' => 'dbMonitoring',
+             'db' => 'db_monitoring',
             'sessionTable' => 'web_sessions',
         ],
         
@@ -58,7 +58,7 @@ $config = [
         ],
         
         //'db' => require(__DIR__ . '/db.php'),
-        'dbMonitoring' => require(__DIR__.'/db_monitoring.php'),
+        'db_monitoring' => require(__DIR__.'/db_monitoring.php'),
     ],
     'params' => $params,
 ];

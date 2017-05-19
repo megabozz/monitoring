@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 class BaseModel extends ActiveRecord {
 
     public static function getDb() {
-        return Yii::$app->get('dbMonitoring');
+        return Yii::$app->get('db_monitoring');
     }
 
     public function getColumns() {

@@ -16,7 +16,7 @@ class User extends ActiveRecord implements IdentityInterface {
     public $_ADinfo;
 
     public static function getDb() {
-        return Yii::$app->dbMonitoring;
+        return Yii::$app->db_monitoring;
     }
 
     public static function tableName() {

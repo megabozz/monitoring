@@ -6,11 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 //use app\models\Sklad;
 
-class OData extends ActiveRecord {
-
-    public static function getDb() {
-        return Yii::$app->get('dbMonitoring');
-    }
+class OData extends BaseModel {
 
     public static function tableName() {
         return 'o_data';
