@@ -39,21 +39,24 @@ class AuthController extends DefaultController {
                 if ($model->validate()) {
                     $identity = \app\models\User::findOne([
                                 'login' => $model->login,
+                                'password' => $model->password,
                                 'active' => 1,
                     ]);
                     if ($identity) {
-                        $ADinfo = Ldap::getUserInfo($model->login, $model->password);
-                        if ($ADinfo) {
-                            if ($e = Yii::$app->user->login($identity)) {
-                                Yii::$app->user->identity->ADinfo = $ADinfo;
-                                //Yii::$app->session['user.adinfo'] = $ADinfo;
-                                return $this->redirect(\yii\helpers\Url::previous());
-                            }
+                        //$ADinfo = Ldap::getUserInfo($model->login, $model->password);
+                        //if ($ADinfo) {
+                        if ($e = Yii::$app->user->login($identity)) {
+                            //Yii::$app->user->identity->ADinfo = $ADinfo;
+                            //Yii::$app->session['user.adinfo'] = $ADinfo;
+                            return $this->redirect(\yii\helpers\Url::previous());
                         }
+                        //}
+                    }else{
+                        $model->login = $model->password = '';
                     }
                 }
             }
-            $model->login = $model->password = '';
+            
 
             return $this->render('login', ['model' => $model]);
         }

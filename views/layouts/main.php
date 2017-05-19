@@ -28,7 +28,11 @@ AppAsset::register($this);
             
             $uitem = [ 'label' => 'GUEST', 'items' => []];
             if(!Yii::$app->user->isGuest){
-                $uitem['label'] = Yii::$app->user->identity->getADfield('displayname');
+                    if($d = Yii::$app->user->identity->getADfield('displayname')){
+                    $uitem['label'] = $d;
+                }else{
+                    $uitem['label'] = Yii::$app->user->identity->login;
+                }
                 if($d = Yii::$app->user->identity->getADfield('description')){
                     $uitem['items'][] = ['label' => $d];
                 }
@@ -38,6 +42,7 @@ AppAsset::register($this);
                 if($d = Yii::$app->user->identity->getADfield('mail')){
                     $uitem['items'][] = ['label' => $d];
                 }
+                $uitem['items'][] = ['label' => 'Logout', 'url' => '/auth/logout'];
             }
                 //'label' => Yii::$app->user->isGuest ? 'GUEST' : Yii::$app->user->identity->getFullName()];
             

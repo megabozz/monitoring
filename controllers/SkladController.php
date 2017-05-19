@@ -11,7 +11,7 @@ class SkladController extends DefaultController {
         $b = parent::behaviors();
         $b['access']['rules'][] = [
             'allow' => true,
-            'roles' => ['admin'],
+            'roles' => ['admin','xxx'],    // какие роли заходят сюда
         ];
         return $b;
     }
