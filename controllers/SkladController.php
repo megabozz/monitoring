@@ -1,13 +1,5 @@
 <?php
-/* OLOLOL!!! 
-tretretretret
- fjyfygfukgyhtfthrd
- * gjhyfjftrjd
- * hggfcdddff
-  */
 
-/* OLOLOL!!! */
-/*cbvcbvcbvcbvc*/
 namespace app\controllers;
 
 use app\models\db\IncidentByGroup;
