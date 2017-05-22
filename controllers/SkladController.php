@@ -9,10 +9,21 @@ class SkladController extends DefaultController {
 
     public function behaviors() {
         $b = parent::behaviors();
+        
+        // добавление правила авторизации
         $b['access']['rules'][] = [
             'allow' => true,
-            'roles' => ['admin','xxx'],    // какие роли заходят сюда
+            // разрешённые actions для данного правила
+            'actions' => [
+                'incidents_by_group',
+                'incidents_by_sender',
+            ],
+            // разрешённые roles для данного правила
+            'roles' => [
+                'admin',
+            ], 
         ];
+        
         return $b;
     }
 
@@ -26,15 +37,15 @@ class SkladController extends DefaultController {
         $model = new IncidentByGroup(['scenario' => 'view']);
         $columns = $model->getColumns();
         $find = $model->find();
-        return $this->render('incidents', ['model' => $find, 'columns'=> $columns]);
+        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
     }
-    public function actionIncidents_by_sender(){
+
+    public function actionIncidents_by_sender() {
         $this->view->title = "SKLAD / INCIDENTS BY SENDER";
-        $model = new IncidentBySender(['scenario'=>'view']);
+        $model = new IncidentBySender(['scenario' => 'view']);
         $find = $model->find();
         $columns = $model->getColumns();
-        return $this->render('incidents', ['model' => $find, 'columns'=> $columns]);
-        
+        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
     }
 
 }
