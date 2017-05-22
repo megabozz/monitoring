@@ -9,6 +9,18 @@ class SkladController extends DefaultController {
 
     public function behaviors() {
         $b = parent::behaviors();
+
+        // добавление правила авторизации
+        $b['access']['rules'][] = [
+            'allow' => true,
+            // разрешённые actions для данного правила (если пусто то разрешены любые actions)
+            'actions' => [
+            ],
+            // разрешённые roles для данного правила
+            'roles' => [
+                'admin',
+            ],
+        ];
         
         // добавление правила авторизации
         $b['access']['rules'][] = [
@@ -20,10 +32,10 @@ class SkladController extends DefaultController {
             ],
             // разрешённые roles для данного правила
             'roles' => [
-                'admin',
-            ], 
+                'sklad',
+            ],
         ];
-        
+
         return $b;
     }
 
