@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\db\IncidentByGroup;
 use app\models\db\IncidentBySender;
+use app\models\db\IncidentByGroupSpisok;
 
 class SkladController extends DefaultController {
 
@@ -60,8 +61,8 @@ class SkladController extends DefaultController {
         return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
     }
      public function actionIncidents_by_group_spisok() {
-        $this->view->title = "SKLAD / INCIDENTS BY GROUP";
-        $model = new IncidentByGroup(['scenario' => 'view']);
+        $this->view->title = "SKLAD / INCIDENTS BY GROUP SPISOK";
+        $model = new IncidentByGroupSpisok(['scenario' => 'view']);
         $columns = $model->getColumns();
         $find = $model->find();
         return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
