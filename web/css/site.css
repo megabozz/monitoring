@@ -132,12 +132,16 @@ body > .wrap > .container > .grid-view > div.summary {
 
 
 body {
-    background-color : #000000;
-    color: #ffffff;
+    background-color : #A9A9A9;
+    color: #000000;
 }
 button {
-    background-color: #a94442;
+    background-color: #999;
 }
-.table-striped > tbody > tr:nth-of-type(odd) {
+/* .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: inherit;
+   
+}*/
+.navbar-inverse {
+    
 }

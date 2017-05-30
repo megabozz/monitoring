@@ -24,6 +24,7 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
 
         <div class="wrap">
+            
             <?php
             
             $uitem = [ 'label' => 'GUEST', 'items' => []];
@@ -51,15 +52,18 @@ AppAsset::register($this);
                 'brandLabel' => 'MONITORING',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse navbar-fixed-left',
                 ],
             ]);
+            echo "<img height ='50' width = '500' src= monitoring/logo.jpg>";
+            
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
             ['label' => 'SKLAD', 'items' => [
                 ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
                 ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
+                ['label' => 'Incidents by group spisok', 'url' => ['/sklad/incidents_by_group_spisok']],
             ]],
             $uitem,
 //            ['label' => 'About', 'url' => ['/site/about']],

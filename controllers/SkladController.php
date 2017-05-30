@@ -59,5 +59,11 @@ class SkladController extends DefaultController {
         $columns = $model->getColumns();
         return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
     }
-
+     public function actionIncidents_by_group_spisok() {
+        $this->view->title = "SKLAD / INCIDENTS BY GROUP";
+        $model = new IncidentByGroup(['scenario' => 'view']);
+        $columns = $model->getColumns();
+        $find = $model->find();
+        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
+    }
 }
