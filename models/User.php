@@ -3,10 +3,9 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
-class User extends ActiveRecord implements IdentityInterface {
+class User extends db\BaseModel implements IdentityInterface {
 
 //    public $id;
 //    public $username;
@@ -15,6 +14,13 @@ class User extends ActiveRecord implements IdentityInterface {
     public $accessToken;
     public $_ADinfo;
 
+    public function rules() {
+        return [
+            [['login','email','roles','phone','active'], 'safe', 'on' => ['view']]
+        ];
+    }
+    
+    
     public static function getDb() {
         return Yii::$app->db_monitoring;
     }
