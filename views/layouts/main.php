@@ -55,7 +55,7 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-left',
                 ],
             ]);
-            echo "<img height ='50' width = '500' src = monitoring/logo.jpg>";
+            echo "<img height ='50' width = '500' src= monitoring/logo.jpg>";
             
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
@@ -63,7 +63,7 @@ AppAsset::register($this);
             ['label' => 'SKLAD', 'items' => [
                 ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
                 ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
-                ['label' => 'Incidents by group spisok', 'url' => ['/sklad/incidents_by_group_spisok']],
+                ['label' => 'Incidents by group Spisok', 'url' => ['/sklad/incidents_by_group_Spisok']],
             ]],
             $uitem,
 //            ['label' => 'About', 'url' => ['/site/about']],
