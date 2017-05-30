@@ -2,6 +2,7 @@
 
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 $provider = new ActiveDataProvider(
         [
@@ -10,12 +11,15 @@ $provider = new ActiveDataProvider(
     ],
         ]);
 
+$columns[] = [
+    'class' => ActionColumn::className()
+];
+
 GridView::begin([
     'dataProvider' => $provider,
-    'columns' => $columns + [
-        'class' => ActionColumn::className(),
+    'columns' => $columns,
         // you may configure additional properties here
-    ],
+   
 ]);
 GridView::end();
 

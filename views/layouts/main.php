@@ -24,6 +24,7 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
 
         <div class="wrap">
+            
             <?php
             $uitem = ['label' => 'GUEST', 'items' => []];
             if (!Yii::$app->user->isGuest) {
@@ -49,6 +50,7 @@ AppAsset::register($this);
                 ['label' => 'SKLAD', 'items' => [
                         ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
                         ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
+                        ['label' => 'Incidents by group spisok', 'url' => ['/sklad/incidents_by_group_spisok']],
                     ]],
                 $uitem,
             ];
@@ -67,13 +69,30 @@ AppAsset::register($this);
                 'brandLabel' => 'MONITORING',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse navbar-fixed-left',
                 ],
             ]);
+            echo "<img height='50' width='500' src='/static/logo.jpg'>";
+            
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $items,
-            ]);
+//            ['label' => 'About', 'url' => ['/site/about']],
+//            ['label' => 'Contact', 'url' => ['/site/contact']],
+//            Yii::$app->user->isGuest ? (
+//                ['label' => 'Login', 'url' => ['/site/login']]
+//            ) : (
+//                '<li>'
+//                . Html::beginForm(['/site/logout'], 'post')
+//                . Html::submitButton(
+//                    'Logout (' . Yii::$app->user->identity->username . ')',
+//                    ['class' => 'btn btn-link logout']
+//                )
+//                . Html::endForm()
+//                . '</li>'
+//            )
+                ]
+            );
             NavBar::end();
             ?>
 

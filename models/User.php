@@ -14,6 +14,13 @@ class User extends db\BaseModel implements IdentityInterface {
     public $accessToken;
     public $_ADinfo;
 
+    public function rules() {
+        return [
+            [['login','email','roles','phone','active'], 'safe', 'on' => ['view']]
+        ];
+    }
+    
+    
     public static function getDb() {
         return Yii::$app->db_monitoring;
     }
