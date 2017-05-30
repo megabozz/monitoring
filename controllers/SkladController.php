@@ -30,10 +30,11 @@ class SkladController extends DefaultController {
             'actions' => [
                 'incidents_by_group',
                 'incidents_by_sender',
+                'incidents_by_group_spisok',
             ],
             // разрешённые roles для данного правила
             'roles' => [
-                'sklad',
+                'sklad','user','viewer',
             ],
         ];
 
