@@ -12,14 +12,18 @@ $provider = new ActiveDataProvider(
         ]);
 
 $columns[] = [
-    'class' => ActionColumn::className()
+    'class' => ActionColumn::className(),
+    'urlCreator' => function($action, $model, $key, $index) {
+        //var_dump($this->context->id);
+        $url = "{$this->context->id}/{$action}?id=" . $model->id;
+        return $url;
+    },
+    'template' => '{view}{update}',
 ];
 
 GridView::begin([
     'dataProvider' => $provider,
     'columns' => $columns,
-        // you may configure additional properties here
-   
 ]);
 GridView::end();
 
