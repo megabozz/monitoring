@@ -13,6 +13,7 @@ class IncidentBySender extends BaseModel {
     public function rules() {
         return [
             [['name','errors'],'safe','on'=>['view']],
+            [['name'],'safe','on'=>['search']],
         ];
     }
     public function attributeLabels() {

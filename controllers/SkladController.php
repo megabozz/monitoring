@@ -48,24 +48,21 @@ class SkladController extends DefaultController {
 
     public function actionIncidents_by_group() {
         $this->view->title = "SKLAD / INCIDENTS BY GROUP";
-        $model = new IncidentByGroup(['scenario' => 'view']);
-        $columns = $model->getColumns();
-        $find = $model->find();
-        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
+        $model = new IncidentByGroup(['scenario' => 'search']);
+        $model->load(\Yii::$app->request->queryParams);
+        return $this->render('incidents', ['model' => $model]);
     }
 
     public function actionIncidents_by_sender() {
         $this->view->title = "SKLAD / INCIDENTS BY SENDER";
-        $model = new IncidentBySender(['scenario' => 'view']);
-        $find = $model->find();
-        $columns = $model->getColumns();
-        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
+        $model = new IncidentBySender(['scenario' => 'search']);
+        $model->load(\Yii::$app->request->queryParams);
+        return $this->render('incidents', ['model' => $model]);
     }
      public function actionIncidents_by_group_spisok() {
         $this->view->title = "SKLAD / INCIDENTS BY GROUP SPISOK";
-        $model = new IncidentByGroupSpisok(['scenario' => 'view']);
-        $columns = $model->getColumns();
-        $find = $model->find();
-        return $this->render('incidents', ['model' => $find, 'columns' => $columns]);
+        $model = new IncidentByGroupSpisok(['scenario' => 'search']);
+        $model->load(\Yii::$app->request->queryParams);
+        return $this->render('incidents', ['model' => $model]);
     }
 }

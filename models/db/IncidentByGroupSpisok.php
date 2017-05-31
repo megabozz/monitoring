@@ -13,7 +13,8 @@ class IncidentByGroupSpisok extends BaseModel {
 
     public function rules() {
         return [
-            [['date', 'name', 'order_id', 'errors', 'receiver'], 'safe', 'on' => ['view']],
+            [['date', 'name', 'order_id', 'receiver'], 'safe', 'on' => ['view']],
+            [['date', 'name', 'order_id', 'receiver'], 'safe', 'on' => ['search']],
         ];
     }
     

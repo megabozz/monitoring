@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\IdentityInterface;
+use kartik\builder\Form;
 
 class User extends db\BaseModel implements IdentityInterface {
 
@@ -13,14 +14,24 @@ class User extends db\BaseModel implements IdentityInterface {
     public $authKey;
     public $accessToken;
     public $_ADinfo;
+    
+    static public $_roles = [
+        'admin' => 'admin',
+        'sklad' => 'sklad',
+    ];
+    
 
     public function rules() {
         return [
-            [['login','email','roles','phone','active'], 'safe', 'on' => ['view']]
+            [['login', 'email', 'roles', 'phone', 'active'], 'safe', 'on' => ['view']],
+            [['login', 'email', 'roles', 'phone', 'active'], 'safe', 'on' => ['update','create']],
+            [['login', 'active'], 'required', 'on' => ['update','create']]
+            
+            
+            
         ];
     }
-    
-    
+
     public static function getDb() {
         return Yii::$app->db_monitoring;
     }
@@ -96,6 +107,43 @@ class User extends db\BaseModel implements IdentityInterface {
             return $this->ADinfo[$field][0];
         }
         return '';
+    }
+
+    public function getFormAttr() {
+        $f = parent::getFormAttr();
+        $a = [
+            [
+                'attributes' => [
+                    'login' => [
+                        'type' => Form::INPUT_TEXT,
+                    ],
+                    'email' => [
+                        'type' => Form::INPUT_TEXT,
+                    ],
+                    'phone' => [
+                        'type' => Form::INPUT_TEXT,
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'roles' => [
+                        'type' =>  Form::INPUT_MULTISELECT,
+                        'items' => self::$_roles 
+                    ],
+                    
+                    'active' => [
+                        'type' => Form::INPUT_CHECKBOX,
+                    ],
+                ]
+            ],
+            
+        ];
+
+        $f = \yii\helpers\ArrayHelper::merge($a, $f);
+
+
+        return $f;
     }
 
 }

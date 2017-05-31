@@ -50,7 +50,7 @@ class DefaultController extends Controller {
 
             $this->view->params['menu']['items'][] = [
                 'label' => 'ADMIN', 'items' => [
-                    ['label' => 'Users Manage', 'url' => ['admin/users']]
+                    ['label' => 'Users Manage', 'url' => ['/admin/users']]
                 ]
             ];
         }

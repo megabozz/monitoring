@@ -14,6 +14,7 @@ class IncidentByGroup extends BaseModel {
     public function rules() {
         return [
             [['name', 'ib_code', 'errors'], 'safe', 'on' => ['view']],
+            [['name', 'ib_code'], 'safe', 'on' => ['search']],
         ];
     }
     
