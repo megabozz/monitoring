@@ -25,6 +25,11 @@ class UsersController extends DefaultController {
         return $b;
     }
 
+    public function beforeAction($action) {
+        $this->view->params['breadcrumbs'][] = ['label' => 'USERS', 'url' => '/admin/users'];
+        return parent::beforeAction($action);
+    }
+    
     public function actionIndex($id = '') {
         $this->view->title = "USERS";
         $model = new User(['scenario' => 'view']);
@@ -35,6 +40,8 @@ class UsersController extends DefaultController {
 
     public function actionView($id) {
         $this->view->title = "VIEW USER";
+        $this->view->params['breadcrumbs'][] = 'VIEW';
+        
         $model = User::findOne(['id' => $id]);
         if ($model) {
             $model->scenario = 'view';
@@ -44,6 +51,7 @@ class UsersController extends DefaultController {
 
     public function actionUpdate($id) {
         $this->view->title = "UPDATE USER";
+        $this->view->params['breadcrumbs'][] = 'UPDATE';
         $model = User::findOne(['id' => $id]);
         if ($model) {
             $model->scenario = 'update';
@@ -62,10 +70,11 @@ class UsersController extends DefaultController {
                 
             }
         }
-        return $this->render('update', ['model' => $model]);
+        return $this->render('form', ['model' => $model]);
     }
     public function actionCreate() {
         $this->view->title = "CREATE USER";
+        $this->view->params['breadcrumbs'][] = 'CREATE';
         $model = new User(['scenario' => 'create']);
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -80,7 +89,7 @@ class UsersController extends DefaultController {
                 
             }
         }
-        return $this->render('update', ['model' => $model]);
+        return $this->render('form', ['model' => $model]);
     }
 
 }

@@ -128,7 +128,7 @@ class User extends db\BaseModel implements IdentityInterface {
             [
                 'attributes' => [
                     'roles' => [
-                        'type' =>  Form::INPUT_CHECKBOX_LIST,
+                        'type' =>  Form::INPUT_MULTISELECT,
                         'items' => self::$_roles 
                     ],
                     
