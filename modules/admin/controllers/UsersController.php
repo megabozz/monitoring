@@ -62,8 +62,24 @@ class UsersController extends DefaultController {
                 
             }
         }
-
-
+        return $this->render('update', ['model' => $model]);
+    }
+    public function actionCreate() {
+        $this->view->title = "CREATE USER";
+        $model = new User(['scenario' => 'create']);
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate()) {
+                    if (is_array($model->roles)) {
+                        $model->roles = implode(',', $model->roles);
+                    }
+                    $model->save();
+                    $this->redirect(Yii::$app->urlManager->createUrl('admin/users'));
+                }
+            } else {
+                
+            }
+        }
         return $this->render('update', ['model' => $model]);
     }
 

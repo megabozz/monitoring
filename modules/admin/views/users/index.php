@@ -21,6 +21,8 @@ $columns[] = [
     'template' => '{view}{update}',
 ];
 
+    echo \yii\helpers\Html::a('CREATE', 'users/create');
+    
 GridView::begin([
     'dataProvider' => $provider,
     'columns' => $columns,

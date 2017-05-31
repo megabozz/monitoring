@@ -24,8 +24,8 @@ class User extends db\BaseModel implements IdentityInterface {
     public function rules() {
         return [
             [['login', 'email', 'roles', 'phone', 'active'], 'safe', 'on' => ['view']],
-            [['login', 'email', 'roles', 'phone', 'active'], 'safe', 'on' => ['update']],
-            [['login', 'active'], 'required', 'on' => ['update']]
+            [['login', 'email', 'roles', 'phone', 'active'], 'safe', 'on' => ['update','create']],
+            [['login', 'active'], 'required', 'on' => ['update','create']]
             
             
             
