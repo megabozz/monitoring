@@ -24,21 +24,59 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
 
         <div class="wrap">
+            
             <?php
+            $uitem = ['label' => 'GUEST', 'items' => []];
+            if (!Yii::$app->user->isGuest) {
+                if ($d = Yii::$app->user->identity->getADfield('displayname')) {
+                    $uitem['label'] = $d;
+                } else {
+                    $uitem['label'] = Yii::$app->user->identity->login;
+                }
+                if ($d = Yii::$app->user->identity->getADfield('description')) {
+                    $uitem['items'][] = ['label' => $d];
+                }
+                if ($d = Yii::$app->user->identity->getADfield('telephonenumber')) {
+                    $uitem['items'][] = ['label' => $d];
+                }
+                if ($d = Yii::$app->user->identity->getADfield('mail')) {
+                    $uitem['items'][] = ['label' => $d];
+                }
+                $uitem['items'][] = ['label' => 'Logout', 'url' => '/auth/logout'];
+            }
+            //'label' => Yii::$app->user->isGuest ? 'GUEST' : Yii::$app->user->identity->getFullName()];
+
+            $items = [
+                ['label' => 'SKLAD', 'items' => [
+                        ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
+                        ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
+                        ['label' => 'Incidents by group spisok', 'url' => ['/sklad/incidents_by_group_spisok']],
+                    ]],
+                $uitem,
+            ];
+
+                if(isset($this->params['menu']['items'])){
+////                    $uitem['items'][] = $this->params['menu']['items'];
+//                    
+                    $items = yii\helpers\ArrayHelper::merge($this->params['menu']['items'], $items);
+//                    
+//  //                  var_dump($uitem['items']);
+////                    var_dump($this->params['menu']['items']);exit;
+                }
+            
+            
             NavBar::begin([
                 'brandLabel' => 'MONITORING',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse navbar-fixed-left',
                 ],
             ]);
+            echo "<img height='50' width='500' src='/static/logo.jpg'>";
+            
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-            ['label' => 'SKLAD', 'items' => [
-                ['label' => 'Incidents by group', 'url' => ['/sklad/incidents_by_group']],
-                ['label' => 'Incidents by sender', 'url' => ['/sklad/incidents_by_sender']],
-            ]],
+                'items' => $items,
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
 //            Yii::$app->user->isGuest ? (
@@ -53,16 +91,18 @@ AppAsset::register($this);
 //                . Html::endForm()
 //                . '</li>'
 //            )
-                ],
-            ]);
+                ]
+            );
             NavBar::end();
             ?>
 
             <div class="container">
                 <div id="breadcrumbs">
-                    <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]) ?>
+<?= Breadcrumbs::widget([
+    'homeLink' => false,
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]) ?>
                 </div>
-                <?= $content ?>
+                    <?= $content ?>
             </div>
         </div>
         <!--
@@ -74,7 +114,7 @@ AppAsset::register($this);
             </div>
         </footer>
         -->
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
     </body>
 </html>
-<?php $this->endPage() ?>
+        <?php $this->endPage() ?>

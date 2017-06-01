@@ -7,7 +7,13 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute' => 'main/index',
-    'language'=>'ru',
+    'language' => 'ru',
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        // ... other configurations for the module ...
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -17,10 +23,10 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
+            'class' => 'app\models\Webuser',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'loginUrl'=>['auth/login'],
-
+            'loginUrl' => ['auth/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'main/error',
@@ -41,13 +47,11 @@ $config = [
                 ],
             ],
         ],
-        
         'session' => [
             'class' => yii\web\DbSession::className(),
-             'db' => 'dbMonitoring',
+            'db' => 'db_monitoring',
             'sessionTable' => 'web_sessions',
         ],
-        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -55,9 +59,8 @@ $config = [
                 '/' => '/main',
             ],
         ],
-        
         //'db' => require(__DIR__ . '/db.php'),
-        'dbMonitoring' => require(__DIR__.'/db_monitoring.php'),
+        'db_monitoring' => require(__DIR__ . '/db_monitoring.php'),
     ],
     'params' => $params,
 ];
@@ -67,15 +70,15 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

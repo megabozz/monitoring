@@ -3,7 +3,7 @@
 $params = require(__DIR__ . '/params.php');
 //$db = require(__DIR__ . '/db.php');
 
-$dbMonitoring = require(__DIR__ . '/db_monitoring.php');
+$db_monitoring = require(__DIR__ . '/db_monitoring.php');
 
 
 $config = [
@@ -24,7 +24,7 @@ $config = [
             ],
         ],
 //        'db' => $db,
-        'dbMonitoring' => $dbMonitoring,
+        'db_monitoring' => $db_monitoring,
     ],
     'params' => $params,
     /*
