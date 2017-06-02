@@ -17,7 +17,8 @@ class User extends db\BaseModel implements IdentityInterface {
     
     static public $_roles = [
         'admin' => 'admin',
-        'sklad' => 'sklad',
+        'user' => 'user',
+        'mail_alarm' => 'mail_alarm'
     ];
     
 
